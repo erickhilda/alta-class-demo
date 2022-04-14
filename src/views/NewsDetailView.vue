@@ -5,7 +5,6 @@ export default {
       let currentArticle = {};
       if (this.$store.state.articles.length === 0) {
         currentArticle = JSON.parse(localStorage.getItem("currentArticle"));
-        console.log("🚀 ~ article ~ currentArticle", typeof currentArticle);
       } else {
         currentArticle = this.$store.state.articles.find(
           (article) => article.title === this.$route.params.id

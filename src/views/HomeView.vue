@@ -68,11 +68,12 @@ export default {
     },
   },
   methods: {
-    fetchArticles({ query, category, countryId }) {
+    fetchArticles({ query, category, countryId, page }) {
       this.$store.dispatch("fetchArticles", {
         query,
         category,
         countryId,
+        page,
       });
     },
     navigateToNewsPage(article) {
@@ -137,6 +138,24 @@ export default {
           }
         "
       />
+    </div>
+    <div>
+      <ul class="flex flex-row gap-3 cursor-pointer">
+        <li
+          v-for="(n, index) in 10"
+          :key="index"
+          @click="
+            fetchArticles({
+              query: '',
+              category: category,
+              countryId: countryId,
+              page: n,
+            })
+          "
+        >
+          {{ n }}
+        </li>
+      </ul>
     </div>
     <div class="grid grid-cols-4 gap-2 mt-4">
       <card-item

@@ -27,8 +27,8 @@ export const store = createStore({
     incrementValue({ commit }) {
       commit("increment");
     },
-    fetchArticles({ commit }, { query, category, countryId }) {
-      const API_URL = `https://newsapi.org/v2/top-headlines?country=${countryId}&category=${category}&q=${query}&apiKey=${API_KEY}`;
+    fetchArticles({ commit }, { query, category, countryId, page }) {
+      const API_URL = `https://newsapi.org/v2/top-headlines?country=${countryId}&category=${category}&q=${query}&apiKey=${API_KEY}&pageSize=10&page=${page}`;
       commit("setLoading", true);
       fetch(API_URL)
         .then((response) => response.json())
