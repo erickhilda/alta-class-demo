@@ -1,5 +1,11 @@
-import { expect, assert, test, describe } from "vitest";
-import { sumOf, substractOf, multiplyOf, divideOf, areaOf } from "../useMathOperation";
+import { expect, test, describe } from "vitest";
+import {
+  sumOf,
+  substractOf,
+  multiplyOf,
+  divideOf,
+  areaOf,
+} from "../useMathOperation";
 
 describe("useMathOperation", () => {
   test("should add a + b and resulting a + b", () => {
@@ -26,5 +32,7 @@ describe("useMathOperation", () => {
   test("should return error if a or b is undefined", () => {
     expect(areaOf(undefined, 2)).toBe("value cannot be undefined");
     expect(areaOf(1, undefined)).toBe("value cannot be undefined");
+    expect(areaOf(undefined, undefined)).toBe("value cannot be undefined");
+    expect(areaOf(1, 1)).toBe(1);
   });
 });

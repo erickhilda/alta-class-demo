@@ -1,44 +1,16 @@
 import { createStore } from "vuex";
+import auth from "./modules/auth";
 
-const API_KEY = import.meta.env.VITE_APP_NEWS_API_KEY;
+const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 export const store = createStore({
   state() {
-    return {
-      count: 1,
-      articles: [],
-      loading: false,
-      error: false,
-    };
+    return {};
   },
-  mutations: {
-    increment(state) {
-      state.count++;
-    },
-    setArticles(state, payload) {
-      state.articles = payload;
-    },
-    setLoading(state, payload) {
-      state.loading = payload;
-    },
-  },
+  mutations: {},
 
-  actions: {
-    incrementValue({ commit }) {
-      commit("increment");
-    },
-    fetchArticles({ commit }, { query, category, countryId }) {
-      const API_URL = `https://newsapi.org/v2/top-headlines?country=${countryId}&category=${category}&q=${query}&apiKey=${API_KEY}`;
-      commit("setLoading", true);
-      fetch(API_URL)
-        .then((response) => response.json())
-        .then((data) => {
-          commit("setArticles", data.articles);
-          commit("setLoading", false);
-        })
-        .catch((error) => {
-          console.log("🚀 ~ fetchArticles ~ error", error);
-        });
-    },
+  actions: {},
+  modules: {
+    auth,
   },
 });

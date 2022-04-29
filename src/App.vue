@@ -1,26 +1,28 @@
 <script>
-import SideBar from "./components/SideBar.vue";
 import NavBar from "./components/NavBar.vue";
 
 export default {
-  components: { SideBar, NavBar },
+  name: "App",
+  components: {
+    NavBar,
+  },
+  data() {
+    return {
+      message: "Hello Vue!",
+    };
+  },
+  created() {
+    const user = localStorage.getItem("user");
+    this.$store.commit("setUser", user);
+  },
 };
 </script>
 
 <template>
-  <div class="flex h-screen">
-    <side-bar />
-    <div
-      class="flex flex-col flex-1 min-h-screen overflow-x-hidden overflow-y-auto"
-    >
+  <div class="flex min-h-screen flex-col overflow-hidden">
+    <main class="py-6 w-full mx-auto max-w-3xl h-full">
       <nav-bar />
-      <main class="px-6 py-6">
-        <RouterView />
-      </main>
-    </div>
+      <router-view />
+    </main>
   </div>
 </template>
-
-<style>
-@import "@/assets/base.css";
-</style>
