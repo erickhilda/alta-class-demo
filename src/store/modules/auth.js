@@ -13,26 +13,28 @@ const getters = {
 
 const actions = {
   async Register({ dispatch }, form) {
-    await axios.post("register", form);
+    await axios.post("api/auth/local/register", form);
     let UserForm = new FormData();
-    UserForm.append("username", form.username);
+    UserForm.append("identifier", form.username);
     UserForm.append("password", form.password);
     await dispatch("LogIn", UserForm);
   },
 
   async LogIn({ commit }, user) {
-    await axios.post("login", user);
-    await commit("setUser", user.get("username"));
-    localStorage.setItem("user", user.get("username"));
+    const result = await axios.post("api/auth/local", user);
+    const userRes = await result.data;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${userRes.jwt}`;
+    await commit("setUser", userRes.user.username);
+    localStorage.setItem("user", userRes.user.username);
   },
 
   async CreatePost({ dispatch }, post) {
-    await axios.post("post", post);
+    await axios.post("api/tasks", post);
     return await dispatch("GetPosts");
   },
 
   async GetPosts({ commit }) {
-    let response = await axios.get("posts");
+    let response = await axios.get("api/tasks");
     commit("setPosts", response.data);
   },
 

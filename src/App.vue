@@ -12,8 +12,11 @@ export default {
     };
   },
   created() {
+    // console.log(localStorage.getItem("user"));
     const user = localStorage.getItem("user");
-    this.$store.commit("setUser", user);
+    if (user) {
+      this.$store.commit("setUser", user);
+    }
   },
 };
 </script>

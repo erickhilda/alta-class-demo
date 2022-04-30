@@ -5,7 +5,7 @@ import { store } from "./store";
 import axios from "axios";
 import "./assets/base.css";
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL;
 
 axios.interceptors.response.use(undefined, function (error) {
